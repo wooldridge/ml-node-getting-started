@@ -7,8 +7,8 @@ var db = marklogic.createDatabaseClient({
   password: 'admin'
 });
 
+// The following is already in the database
 var json = '{"foo": "bar"}';
-
 var docDescr3 = {
   uri: '/doc3.json',
   content: json
