@@ -1,0 +1,14 @@
+{
+  "name": "ml-node-getting-started",
+  "version": "0.0.1",
+  "description": "Getting started with Node.js and MarkLogic",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "marklogic": "^1.0.5"
+  }
+}
