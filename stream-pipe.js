@@ -7,22 +7,19 @@ var db = marklogic.createDatabaseClient({
   password: 'admin'
 });
 
-// The following is already in the database
-var json = '{"foo": "bar"}';
-var docDescr3 = {
-  uri: '/doc3.json',
-  content: json
-}
+var q = marklogic.queryBuilder;
+
+var f = 'file.txt';
+fs.closeSync(fs.openSync(f, 'w')); // ensure file is empty
 
 var writable = new stream.Writable({
-  write: function(chunk, encoding, next) {
-    console.log(chunk.toString());
-    next();
-  }
+  write: function(obj, encoding, next) {
+    console.log(JSON.stringify(obj, null, 2));
+    fs.writeFile(f, JSON.stringify(obj.content), {flag: 'a'}, next());
+  },
+  objectMode: true
 });
 
-var writable2 = fs.createWriteStream('file.txt');
-
-var str = db.documents.read('/doc3.json')
+db.documents.query('')
   .stream()
-  .pipe(writable2);
+  .pipe(writable);
